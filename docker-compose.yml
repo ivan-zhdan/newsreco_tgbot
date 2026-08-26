@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  # 1. Сервис API с машинным обучением
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: recsys_api
+    ports:
+      - "8000:8000"
+    restart: always
+
+  # 2. Сервис Telegram-бота
+  bot:
+    build:
+      context: .
+      dockerfile: bot/Dockerfile
+    container_name: recsys_bot
+    environment:
+      # Бот внутри сети Docker обращается к API по имени сервиса "http://api:8000"
+      - API_URL=http://api:8000/recommend
+      - BOT_TOKEN=ВАШ_ТОКЕН_ОТ_BOTFATHER
+    depends_on:
+      - api
+    restart: always
