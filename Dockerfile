@@ -12,7 +12,7 @@ WORKDIR /app
 
 # 4. Копируем requirements.txt из папки src/ и устанавливаем зависимости
 # Оптимизирует кэширование Docker: слой пересобирается только при изменении зависимостей
-COPY src/requirements.txt /app/requirements.txt
+COPY requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r /app/requirements.txt
 
