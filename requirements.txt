@@ -6,3 +6,4 @@ pandas
 numpy
 aiogram
 requests
+dotenv
