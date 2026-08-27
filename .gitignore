@@ -1,7 +1,6 @@
 .venv/
 .idea/
 data/
-artifacts/
-*.pkl
+#*.pkl
 .env
 *.env
