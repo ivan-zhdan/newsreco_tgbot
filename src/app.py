@@ -136,6 +136,9 @@ def health_check():
     status = "ok" if model_loaded else "error_no_model"
     return {"status": status, "model_loaded": model_loaded}
 
+@app.get("/")
+def read_root():
+    return {"status": "online", "message": "RecSys API is running"}
 
 @app.post("/recommend", response_model=RecommendationResponse)
 def get_recommendations(request: RecommendRequest):
