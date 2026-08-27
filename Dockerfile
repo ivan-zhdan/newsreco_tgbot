@@ -18,6 +18,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
 
 # 5. Копируем исходный код приложения и веса модели в контейнер
 COPY src/ /app/src/
+COPY bot/ /app/bot/
 COPY models/ /app/models/
 
 # 6. Открываем порт 8000 для подключения FastAPI

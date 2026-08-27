@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  # 1. Сервис API с машинным обучением
+  # 1. Сервис API машинного обучения (FastAPI)
   api:
     build:
       context: .
@@ -15,12 +15,14 @@ services:
   bot:
     build:
       context: .
-      dockerfile: bot/Dockerfile
+      dockerfile: Dockerfile
     container_name: recsys_bot
+    # Переопределяем дефолтную команду Dockerfile на запуск бота
+    command: python bot/main.py
     environment:
-      # Бот внутри сети Docker обращается к API по имени сервиса "http://api:8000"
+      # Внутри сети Docker бот обращаемся к API по имени контейнера "api"
       - API_URL=http://api:8000/recommend
-      - BOT_TOKEN=ВАШ_ТОКЕН_ОТ_BOTFATHER
+      - BOT_TOKEN=${BOT_TOKEN}  # Берёт переменную из локального файла .env
     depends_on:
       - api
     restart: always
