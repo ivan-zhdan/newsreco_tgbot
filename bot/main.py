@@ -5,12 +5,19 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 import os
+from dotenv import load_dotenv
+
 
 # --- Конфигурация бота ---
+
+load_dotenv()
 # Токен бота
-API_TOKEN = os.getenv("BOT_TOKEN", "8914864627:AAH71X9L6OrbK4OaYhb3cY3sGXDVDHDx1J8")
+API_TOKEN = os.getenv("BOT_TOKEN")
 # Загружаем URL из переменной окружения (или берем локальный по умолчанию)
 API_URL = os.getenv("API_URL", "http://localhost:8000/recommend")
+
+if not API_TOKEN:
+    raise ValueError("ОШИБКА: Переменная BOT_TOKEN не задана!")
 
 # Настройка логирования
 logging.basicConfig(level=logging.INFO)
